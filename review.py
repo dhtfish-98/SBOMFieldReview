@@ -16,6 +16,11 @@ def review_text(text: str) -> list[dict[str, str]]:
         raise ValueError("components must be an array")
     findings = []
     refs = set()
+    metadata = document.get("metadata")
+    if isinstance(metadata, dict) and isinstance(metadata.get("component"), dict):
+        root_ref = metadata["component"].get("bom-ref")
+        if isinstance(root_ref, str):
+            refs.add(root_ref)
     for index, component in enumerate(components):
         if not isinstance(component, dict):
             raise ValueError("component must be an object")
@@ -47,4 +52,10 @@ def review_text(text: str) -> list[dict[str, str]]:
                 raise ValueError("dependency ref must be a string")
             if ref not in refs:
                 findings.append({"rule": "unknown-dependency-ref", "location": f"dependencies[{index}]", "note": "Dependency source is not in components"})
+            targets = relation.get("dependsOn", [])
+            if not isinstance(targets, list) or not all(isinstance(target, str) for target in targets):
+                raise ValueError("dependsOn must be a string array")
+            for target in targets:
+                if target not in refs:
+                    findings.append({"rule": "unknown-dependency-target", "location": f"dependencies[{index}]", "note": "Dependency target is not in components"})
     return findings

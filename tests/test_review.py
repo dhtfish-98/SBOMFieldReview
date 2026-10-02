@@ -17,3 +17,7 @@ class SBOMTests(unittest.TestCase):
         for value in ("{}", '{"bomFormat":"CycloneDX","components":{}}', '{"bomFormat":"CycloneDX","components":[],"dependencies":[{"ref":{}}]}', "invalid"):
             with self.subTest(value=value), self.assertRaises(ValueError):
                 review_text(value)
+
+    def test_unknown_target_and_metadata_root(self):
+        bom = {"bomFormat": "CycloneDX", "metadata": {"component": {"bom-ref": "root"}}, "components": [{"name": "x", "version": "1", "bom-ref": "x"}], "dependencies": [{"ref": "root", "dependsOn": ["x", "unknown"]}]}
+        self.assertEqual([item["rule"] for item in review_text(json.dumps(bom))], ["unknown-dependency-target"])

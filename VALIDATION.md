@@ -14,7 +14,7 @@ Check the exact public GitHub commit and its workflow run separately after publi
 
 ## Observed local result (2026-10-02)
 
-- Python 3.14.6: 4/4 unit and CLI integration tests passed.
+- Python 3.14.6: 5/5 unit and CLI integration tests passed.
 - Analyzer and CLI compiled; CLI help rendered.
 - CLI ran with a synthetic finding and JSON output; invalid path returned exit code 2.
 - The source and README were reviewed for local-only defensive scope and stated limitations.
