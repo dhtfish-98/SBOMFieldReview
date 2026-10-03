@@ -1,0 +1,30 @@
+{
+  "schema": "project-build-layout.v1",
+  "project": "SBOMFieldReview",
+  "author": "dhtfish98",
+  "kind": "manual",
+  "base_public_commit": "dff819a6802e4eccc3bb50cdfec738052a134acc",
+  "restored_inputs": [
+    {
+      "original": "LICENSE",
+      "stored": "项目文档/LICENSE",
+      "sha256": "61cc81f0067016c9425160ac683a0791c1f9332a48ffe655d21b2602286e21be"
+    },
+    {
+      "original": "ORIGIN.md",
+      "stored": "项目文档/ORIGIN.md",
+      "sha256": "a1a22d47d3e4f8508df10c887a6ae12a460e1debe96e839ad4f1aac989aa4658"
+    },
+    {
+      "original": "README.md",
+      "stored": "项目文档/README.md",
+      "sha256": "b5ff65bb0bc960be2b8422f24f50f79c1330ff0f81c8ecce215dd8b856ac8ba3"
+    },
+    {
+      "original": "VALIDATION.md",
+      "stored": "项目文档/VALIDATION.md",
+      "sha256": "ee16ebb27db4628a58e8a20e6c967b526d806538440c76cb87d4500f3cd81a1f"
+    }
+  ],
+  "platform_entries": []
+}
