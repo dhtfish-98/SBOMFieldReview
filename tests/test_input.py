@@ -31,6 +31,19 @@ class InputTests(unittest.TestCase):
                 os.close(opened[0])
                 self.fail("input descriptor remained open after stream creation failed")
 
+    def test_stream_creation_failure_preserves_original_error(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "input"
+            path.write_bytes(b"local data")
+
+            def fail_after_closing(descriptor, *args, **kwargs):
+                os.close(descriptor)
+                raise OSError("original stream failure")
+
+            with mock.patch("local_input.os.fdopen", side_effect=fail_after_closing):
+                with self.assertRaisesRegex(OSError, "original stream failure"):
+                    read_local_file(path)
+
     def test_oversized_link_and_nonregular_inputs(self):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder)
